@@ -664,12 +664,17 @@ function openModal(){
   document.body.style.overflow='hidden';
   modalForm.style.display='block';
   modalSuccess.classList.remove('show');
+  history.pushState({modal: true}, '');
 }
 function closeModal(){
   modal.classList.remove('open');
   document.body.style.overflow='';
 }
-
+window.addEventListener('popstate', function() {
+  if(modal.classList.contains('open')) {
+    closeModal();
+  }
+});
 // NAYA CODE -
 document.querySelectorAll('.cta-trigger').forEach(el=>{
   el.addEventListener('click', e=>{
@@ -680,6 +685,7 @@ document.querySelectorAll('.cta-trigger').forEach(el=>{
   // Mobile scroll fix
   el.addEventListener('touchstart', function(){}, {passive: true});
 });
+
 
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
