@@ -64,7 +64,7 @@ section{padding:100px 6vw}
 
 /* ── HERO ── */
 .hero{
-  min-height:74vh;display:grid;
+  min-height:100vh;display:grid;
   grid-template-columns:1fr 1fr;
   overflow:hidden;
 }
@@ -117,7 +117,7 @@ section{padding:100px 6vw}
 .service-card{
   background:var(--ink3);padding:36px 30px;
   transition:background .25s;cursor:pointer;
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;touch-action: manipulation;
 }
 .service-card::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
@@ -669,11 +669,15 @@ function closeModal(){
   document.body.style.overflow='';
 }
 
+// NAYA CODE -
 document.querySelectorAll('.cta-trigger').forEach(el=>{
   el.addEventListener('click', e=>{
     e.preventDefault();
     openModal();
   });
+
+  // Mobile scroll fix
+  el.addEventListener('touchstart', function(){}, {passive: true});
 });
 
 modalClose.addEventListener('click', closeModal);
